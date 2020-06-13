@@ -17,7 +17,7 @@ class City:
     self.lon = lon
 
   def __repr__(self):
-    return "{}: ({:.8g}, {:.8g})".format(self.name, float(self.lat), float(self.lon))
+    return f"City: {self.name}, Lat: {self.lat}, Lon: {self.lon}"
 #
 # Store the instances in the "cities" list, below.
 #
@@ -29,20 +29,29 @@ def cityreader(cities=[]):
   # Implement the functionality to read from the 'cities.csv' file
   # For each city record, create a new City instance and add it to the 
   # `cities` list
-  with open("cities.csv") as csv_file:
-    csvreader = csv.reader(csv_file, delimiter=",")
-    if csv.Sniffer().has_header:
-      next(csvreader)
-    for row in csvreader:
-      cities.append(City(row[0], row[3], row[4]))
-    
+  with open("src/cityreader/cities.csv", newline="") as c:
+    csv_reader = csv.reader(c, delimiter=",")
+    line_count = 0
+    #next(csv_reader)
+    for row in csv_reader:
+      if line_count == 0:
+        line_count += 1
+        pass
+      else:
+        cities.append(City(row[0], float(row[3]), float(row[4])))
+        line_count += 1
+    # Print the list of cities (name, lat, lon), 1 record per line.
+    for c in cities:
+        print(c)
+
+    print(f"\n Number of Lines Processed: {line_count}\n\n")
+    #print(len(cities), "Cities' Length")
+
     return cities
 
-cityreader(cities)
+print(cityreader(cities))
 
-# Print the list of cities (name, lat, lon), 1 record per line.
-for c in cities:
-    print(c)
+
 
 # STRETCH GOAL!
 #
@@ -73,14 +82,14 @@ for c in cities:
 # Tucson: (32.1558,-110.8777)
 # Salt Lake City: (40.7774,-111.9301)
 
-# TODO Get latitude and longitude values from the user
+# # TODO Get latitude and longitude values from the user
 
-def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
-  # within will hold the cities that fall within the specified region
-  within = []
+# def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
+#   # within will hold the cities that fall within the specified region
+#   within = []
 
-  # TODO Ensure that the lat and lon valuse are all floats
-  # Go through each city and check to see if it falls within 
-  # the specified coordinates.
+#   # TODO Ensure that the lat and lon valuse are all floats
+#   # Go through each city and check to see if it falls within 
+#   # the specified coordinates.
 
-  return within
+#   return within
