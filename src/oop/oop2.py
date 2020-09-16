@@ -20,7 +20,7 @@ class GroundVehicle():
 
 class Motorcycle(GroundVehicle):
     def __init__(self):
-        GroundVehicle.__init__(self, num_wheels=2)
+        GroundVehicle.__init__(self, num_wheels = 2)
 
     def drive(self):
         return f"BRAAAP!!"
